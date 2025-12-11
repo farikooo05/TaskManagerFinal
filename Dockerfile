@@ -28,7 +28,7 @@ RUN gradle clean bootJar --no-daemon
 ###############################################
 # 3. Final runtime image
 ###############################################
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 EXPOSE 8080

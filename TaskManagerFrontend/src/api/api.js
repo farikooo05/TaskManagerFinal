@@ -1,10 +1,14 @@
 import axios from "axios";
 
+// Use env variable OR fallback to empty string (same origin)
+const API_BASE = import.meta.env.VITE_API_URL || "";
+
+// Create axios instance
 export const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: `${API_BASE}`,
 });
 
-// attach JWT if exists
+// Attach JWT if exists
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -15,10 +19,10 @@ api.interceptors.request.use((config) => {
 
 // AUTH
 export const loginRequest = (email, password) =>
-  api.post("/employees/login", { email, password });
+    api.post("/employees/login", { email, password });
 
 export const signupRequest = (payload) =>
-  api.post("/employees/signup", payload);
+    api.post("/employees/signup", payload);
 
 // EMPLOYEES
 export const getEmployees = () => api.get("/employees");
